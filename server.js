@@ -43,8 +43,18 @@ router.get("/", (req, res) => {
 });
 
 app.get("/game", (req, res) => {
-  logger.info("Another entry route to the game!");
-  res.sendFile(path.join(__dirname, "/src/index.html"));  
+  logger.info("Another entry route to the game! Show an updated page based on day of week!");
+  logger.info("Calculating day of week logic start");
+  
+  var date_time = new Date();
+  logger.info("Today's date" + date_time);
+
+  var day_of_week = date_time_getDay();
+  logger.info("Today's day of week" + day_of_week);
+  
+  logger.info("Calculating day of week logic end");
+  // TODO: update path of file with day_of_week value
+  res.sendFile(path.join(__dirname, "/src/index"+ day_of_week +".html"));
 });
 
 app.get("/score", (req, res) => {
